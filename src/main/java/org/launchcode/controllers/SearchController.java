@@ -29,23 +29,19 @@ public class SearchController {
     public String results(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
 
         if (searchType.equals("all")) {
-            List<HashMap<String, String>> jobs = JobData.findByColumnAndValue(searchType, searchTerm);
+            List<HashMap<String, String>> jobs = JobData.findByValue(searchTerm);
             model.addAttribute("columns", ListController.columnChoices);
-            model.addAttribute("title", "Jobs that contain the word:" + searchTerm);
+            model.addAttribute("title", "Jobs that contain the word(s): " + searchTerm);
             model.addAttribute("jobs", jobs);
             return "search";
-
         }
         else {
             List<HashMap<String, String>> jobs = JobData.findByColumnAndValue(searchType, searchTerm);
             model.addAttribute("columns", ListController.columnChoices);
-            model.addAttribute("title", "jobs where " + searchType + " contains the word: " + searchTerm);
+            model.addAttribute("title",  "Jobs where " + searchType + " contains the word(s): " + searchTerm);
             model.addAttribute("jobs", jobs);
             return "search";
         }
-
     }
-
-
 
 }
